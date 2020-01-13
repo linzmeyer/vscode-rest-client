@@ -1,0 +1,48 @@
+# @name CREATE_RESERVATION
+POST {{host}}/api/pms/reservations/ HTTP/1.1
+Authorization: Basic {{token}} {{secret}}
+content-type: application/json
+
+{
+    "reservation": {
+        "unitId": 1,
+        "channelId": 1,
+        "arrivalDate": "2020-01-20",
+        "departureDate": "2020-01-25",
+        "earlyArrival": false,
+        "lateDeparture": false,
+        "arrivalTime": "2020-01-20T20:00:00+00:00",
+        "departureTime": "2020-01-25T16:00:00+00:00",
+        "nights": 7,
+        "status": "Hold",
+        "occupants": {
+            "1": 2,
+            "2": 0,
+            "3": 0
+        },
+        "contact": {
+                "firstName": "Atest",
+                "lastName": "Test123",
+                "primaryEmail": "test1247@gmail.com",
+                "country": "US"
+            },
+        "folioId": 140,
+        "guaranteePolicyId": 3,
+        "cancellationPolicyId": 1,
+        "paymentMethodId": 1,
+        "payment": {
+            "bankAccount" : {
+                "accountNumber" : 4111111111111111,
+                "routingNumber" : 123,
+                "accountType" : "checking",
+                "name" : "Test User"
+            }	
+        },
+        "typeId": 1,
+        "holdExpiration": "2020-01-20T05:00:00+00:00",
+        "isTaxable": true,
+        "agreementStatus": "not-needed"
+    }
+}
+
+###

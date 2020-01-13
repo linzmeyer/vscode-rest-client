@@ -1,0 +1,6 @@
+# @name GET_ALL_RES
+GET {{host}}/api/pms/reservations
+Authorization: Basic {{token}} {{secret}}
+Accept: application/json
+
+###
