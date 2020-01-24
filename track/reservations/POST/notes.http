@@ -1,0 +1,137 @@
+# @name CREATE_RESERVATION
+POST {{host}}/api/pms/reservations/ HTTP/1.1
+Authorization: Basic {{token}} {{secret}}
+content-type: application/json
+
+
+
+{
+    "reservation": {
+        "unitId": 1, /* Required */
+        "confirmationNumber": "", /* Optional */
+        "rateTypeId": 1, /* Optional - Defaults to BAR */
+        "reservationTypeId": 1, /* Optional - Limited to server scope */
+        "arrivalDate": "2018-01-01", /* Required */
+        "departureDate": "2018-02-01", /* Required */
+        "travelInsurance": true, /* Optional - Assumed false if not provided. */
+        "promoCode": "asda212", /* Optional - Not used with breakdown */
+        "addOns": [ /** Optional - Not used with breakdown */
+            {
+                "id": 323,
+                "quantity": 1 /* Implied as 1 if not provided */
+            }
+            /** ... Repeat for all addons */
+        ],
+        "occupants": { /** Occupants in this form is not used with breakdown - see occupantRates */
+            "adults": 1,
+            "children": 1,
+            "pets": 1
+        },
+        /* OR */
+        "occupants": { /** Occupants in this form is not used with breakdown - see occupantRates */
+            "1": 1,
+            "2": 1,
+            "3": 1
+        },
+        /* One of the following is required */
+        "contactId": 1, /* Limited to server key */
+        /* OR */
+        "contact": {
+            "id": "123111", /* Channel Contact Id | Optional */
+            "firstName": "Dan", /* Required */
+            "lastName": "Johansson", /* Required */ 
+            "streetAddress": "123 Any Street",
+            "extendedAddress": "Apt 123",
+            "locality": "City",
+            "region": "MN",
+            "postal": "12345",
+            "country": "US",  /* Must be ISO code if provided */
+            "proxyEmail": "asdfasd@email.booking.com", /* Wont be used yet, but will be in the future */
+            "primaryEmail": "john@doe.com", /*EDI REQUIREMENT*/
+            "secondaryEmail": "john@doe.com",
+            "cellPhone": "+12432342333",
+            "homePhone": "+12432342333",
+            "otherPhone": "+12342234234",
+            "workPhone": "+11231231234" /* Not validated, use this option for shared numbers */
+        },
+​
+        /* Breakdown allows for passing custom pricing, this must be enabled on a channel */
+        "breakdown": {
+           "rates" : [
+               {
+                   "date": "2018-10-01",
+                   "nights": 1,
+                   "rate": "2000.00"
+               }
+               /** ... Repeat for all nights or provide a single rate for all nights */
+           ],
+           "occupantRates": [ // an occupant refers to the extra_persons table
+                {
+                    "id": 1, /** can be set to the occupant type id or be one of adults, children or pets */
+                    "occupancy": 3, /** Include total occupancy of that type */
+                    "extraOccupancy": 1, /** Optional - Include extra occupancy beyond what is included in the rate type */
+                    "unitRate": "10.00", /** Optional - Per night, per person rate */
+                    "totalRate": "20.00" /** Optional - Total rate = $nights * $extraOccupancy * $unitRate  */
+                },
+                /** ... Repeat for all occupant types */
+           ],
+           "fees": [
+                {
+                    "id": 1, /** Fee id, based on available fee ids from pricing */
+                    "quantity": 1, /** Assumed 1 if not provided */
+                    "unitRate": "25.00", /** Rate for a single item */
+                    "rate": "25.00" /** Total Fee */
+                }
+                /** ... Repeat for all fees */
+           ],
+           "taxes" : [ 
+                {
+                    "id": 1, /** Tax ID reference in customer system*/
+                    "tax": "20.25", /** Tax amount */
+                    "remitted": false /** Is this tax remitted by the channel */
+                }
+           ]
+        },
+​
+        /* Required unless merchant */
+        "payment": {
+            "amount": "1000.00", /** Only provide this if the payment amount is different than the deposit or if a payment should be charged reguardless of mode. */
+​
+            /* One of the payment types is required, some restrictions what can be used in what context */
+            "paymentCard": { /** All Contexts */
+                "cardNumber": "4111111111111111", /* Required */
+                "cardCvv": "123", /* Required if gateway requires it */
+                "cardExp": "11-2019", /* Required */
+                "name": "Dan Johansson", /* Optional - Defaults to contact value */
+                "postalCode": "55404", /* Optional - Defaults to contact value */
+                "saveCard": false /** Optional - Defaults to false, unless payment is delayed or guarentee policy is credit card */
+            },
+            "bankAccount": { /** All Contexts */
+                "type": "", /* Required - One of personal-checking, personal-savings, business-checking, business-savings */
+                "accountNumber": "", /** Required - Bank account number */
+                "routingNumber": "", /** Required - Valid routing number*/
+                "name": "" /** Optional - Defaults to contact name if not provided */
+            },
+            "netCommission": { /* Server conttext and specfic channels */
+                "commission": "120.00", /** Required - Commission Amount */
+                "date": "2018-10-01", /** Optional - Payout date, defaults to arrival date */
+                "reference": "2342" /** Optional - Tracking reference for payment */
+            },
+            "paymentMethod": { /** Option limited to server context */
+                "id": 1000,
+                /* OR */
+                "typeId": 1, /** Payment type id, must be cash or check */
+                "reference": ""
+            }
+        },
+    "notes" : [
+        {
+            "note": "Customer note",
+            "isPublic": true /** Set true for customer provided requests */
+        },
+        {
+            "note": "Customer note",
+            "isPublic": false /** Set true for customer provided requests */
+        }
+    ]
+}

@@ -1,5 +1,5 @@
 # @name GET_ALL_RES
-GET {{host}}/api/pms/reservations
+GET {{host}}/api/pms/reservations/1
 Authorization: Basic {{token}} {{secret}}
 Accept: application/json
 

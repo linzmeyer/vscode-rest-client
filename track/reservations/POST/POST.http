@@ -1,0 +1,75 @@
+# @name create_reservation
+POST {{host}}/api/pms/reservations/ HTTP/1.1
+Authorization: Basic {{token}} {{secret}}
+content-type: application/json
+
+
+{
+    "unitId": 1,
+    "confirmationNumber": 1000,
+    "rateTypeId": 1,
+    "reservationTypeId": 1,
+    "arrivalDate": "2020-10-31",
+    "departureDate": "2020-11-06",
+    "travelInsurance": false,
+    "promoCode": "None",
+    "contact": {
+        "firstName": "Dan",
+        "lastName": "Johansson",
+        "primaryEmail": "test1247@gmail.com"
+    },
+    "breakdown": {
+        "rates": [
+            [
+                {
+                   "date": "2018-10-01",
+                   "nights": 1,
+                   "rate": "2000.00"
+               }
+            ]
+        ],
+        "occupantRates": [
+            {
+                "id": 1,
+                "occupancy": 3,
+                "extraOccupancy": 1,
+                "unitRate": "10.00",
+                "totalRate": "20.00"
+            }
+        ],
+        "fees": [
+            {
+                "id": 1,
+                "quantity": 1,
+                "unitRate": "25.00",
+                "rate": "25.00"
+            },
+        ],
+        "taxes": [
+            {
+                "id": 1,
+                "tax": "20.25",
+                "remitted": false
+            }
+        ]
+    },
+    "payment": {
+        "amount": "1000.00",
+        "paymentCard": ""
+    },
+    "paymentMethod": {
+        "id": 15
+    },
+    "notes" : [
+        {
+            "note": "Customer note",
+            "isPublic": true
+        },
+        {
+            "note": "Customer note",
+            "isPublic": false
+        }
+    ]
+}
+
+###
