@@ -14,18 +14,18 @@ content-type: application/json
     "travelInsurance": false,
     "promoCode": "None",
     "contact": {
-        "firstName": "Dan",
-        "lastName": "Johansson",
+        "firstName": "Chase",
+        "lastName": "Linzmeyer",
         "primaryEmail": "test1247@gmail.com"
     },
     "breakdown": {
         "rates": [
             [
                 {
-                   "date": "2018-10-01",
+                   "date": "2020-10-31",
                    "nights": 1,
                    "rate": "2000.00"
-               }
+                }
             ]
         ],
         "occupantRates": [
@@ -43,7 +43,7 @@ content-type: application/json
                 "quantity": 1,
                 "unitRate": "25.00",
                 "rate": "25.00"
-            },
+            }
         ],
         "taxes": [
             {
@@ -71,5 +71,3 @@ content-type: application/json
         }
     ]
 }
-
-###
