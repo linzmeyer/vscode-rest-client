@@ -10,7 +10,7 @@ content-type: application/json
     "rateTypeId": 1,
     "reservationTypeId": 1,
     "arrivalDate": "2020-10-31",
-    "departureDate": "2020-11-06",
+    "departureDate": "2020-11-01",
     "travelInsurance": false,
     "promoCode": "None",
     "contact": {

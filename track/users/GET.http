@@ -1,5 +1,5 @@
 # @name get_res
-GET {{host}}/api/pms/reservations/?search=sdfasdf
+GET {{host}}/api/pms/users/
 Authorization: Basic {{token}} {{secret}}
 Accept: application/json
 
