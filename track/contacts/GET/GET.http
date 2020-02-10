@@ -1,5 +1,5 @@
-# @name get_all_contacts
-GET {{host}}/api/crm/contacts/?primaryEmail=john@johnsemail.com HTTP/1.1
+# @name all
+GET {{host}}/api/crm/contacts HTTP/1.1
 Authorization: Basic {{token}} {{secret}}
 Accept: application/json
 

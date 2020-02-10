@@ -1,0 +1,6 @@
+# @name id
+GET {{host}}/api/pms/reservations/12
+Authorization: Basic {{token}} {{secret}}
+Accept: application/json
+##################################################
+

@@ -1,0 +1,16 @@
+# @name search_1
+GET {{host}}/api/crm/contacts/?search=55104 HTTP/1.1
+Authorization: Basic {{token}} {{secret}}
+Accept: application/json
+
+##################################################
+# @name email
+GET {{host}}/api/crm/contacts/?search=john HTTP/1.1
+Authorization: Basic {{token}} {{secret}}
+Accept: application/json
+##################################################
+# @name phone
+GET {{host}}/api/crm/contacts/?search=john HTTP/1.1
+Authorization: Basic {{token}} {{secret}}
+Accept: application/json
+##################################################

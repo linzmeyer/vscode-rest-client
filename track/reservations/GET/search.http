@@ -1,0 +1,15 @@
+# @name search_1
+GET {{host}}/api/pms/reservations/?search=testConf
+Authorization: Basic {{token}} {{secret}}
+Accept: application/json
+##################################################
+# @name search_2
+GET {{host}}/api/pms/reservations/?search=word
+Authorization: Basic {{token}} {{secret}}
+Accept: application/json
+##################################################
+# @name search_3
+GET {{host}}/api/pms/reservations/?search=testConf
+Authorization: Basic {{token}} {{secret}}
+Accept: application/json
+##################################################
